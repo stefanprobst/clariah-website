@@ -1,0 +1,13 @@
+allowBuilds:
+  '@parcel/watcher': true
+  '@swc/core': true
+  lefthook: true
+
+engineStrict: true
+
+minimumReleaseAge: 1440
+
+patchedDependencies:
+  next: patches/next.patch
+
+shellEmulator: true

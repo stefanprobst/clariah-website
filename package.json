@@ -1,0 +1,114 @@
+{
+	"$schema": "https://www.schemastore.org/package",
+	"name": "@clariah/website",
+	"private": true,
+	"license": "MIT",
+	"type": "module",
+	"imports": {
+		"#/*": "./*"
+	},
+	"scripts": {
+		"analyze": "bun run --bun next experimental-analyze",
+		"build": "bun run --bun next build",
+		"dev": "bun run --bun next dev",
+		"dev:prepare": "sh ./scripts/dev/prepare.sh",
+		"dev:services:down": "sh ./scripts/dev/services.sh stop",
+		"dev:services:setup": "sh ./scripts/dev/setup.sh",
+		"dev:services:up": "sh ./scripts/dev/services.sh start",
+		"format:check": "oxfmt --check",
+		"format:fix": "oxfmt --write",
+		"generate:openapi": "bun ./scripts/openapi/generate.ts",
+		"lint:check": "bun run --parallel lint:code:check lint:styles:check",
+		"lint:code:check": "oxlint --report-unused-disable-directives --type-aware --type-check",
+		"lint:code:fix": "oxlint --fix --report-unused-disable-directives --type-aware --type-check",
+		"lint:fix": "bun run --parallel lint:code:fix lint:styles:fix",
+		"lint:i18n:check": "eloqnt lint",
+		"lint:styles:check": "stylelint \"./**/*.css\" --cache --ignore-path ./.gitignore",
+		"lint:styles:fix": "stylelint \"./**/*.css\" --cache --fix --ignore-path ./.gitignore",
+		"prepare": "bun run dev:prepare types:prepare generate:openapi",
+		"search:api-keys:generate": "bun ./scripts/search/generate-search-api-keys.ts",
+		"search:collections:create": "bun ./scripts/search/create-collections.ts",
+		"search:collections:reset": "bun ./scripts/search/reset-collections.ts",
+		"start": "bun run --bun next start",
+		"test:e2e": "playwright test --config ./e2e/playwright.config.ts",
+		"types:check": "tsc --noEmit",
+		"types:prepare": "ENV_VALIDATION=\"disabled\" bun run --bun next typegen"
+	},
+	"dependencies": {
+		"@acdh-oeaw/lib": "^1.0.7",
+		"@internationalized/date": "^3.12.3",
+		"@tiptap/core": "^3.30.2",
+		"@tiptap/extension-heading": "^3.30.2",
+		"@tiptap/extension-table": "^3.30.2",
+		"@tiptap/starter-kit": "^3.30.2",
+		"@tiptap/static-renderer": "^3.30.2",
+		"@valibot/i18n": "^1.2.0",
+		"better-result": "^3.0.1",
+		"client-only": "^0.0.1",
+		"clsx": "^2.1.1",
+		"is-network-error": "^1.3.2",
+		"lucide-react": "^1.33.0",
+		"next": "^16.3.2",
+		"next-intl": "^4.13.7",
+		"react": "^19.2.8",
+		"react-aria-components": "^1.20.0",
+		"react-dom": "^19.2.8",
+		"react-schemaorg": "^2.0.1",
+		"server-only": "^0.0.1",
+		"sharp": "^0.35.3",
+		"typesense": "^3.0.6",
+		"valibot": "^1.4.2",
+		"xast-util-feed": "^2.0.0",
+		"xast-util-to-xml": "^4.0.0"
+	},
+	"devDependencies": {
+		"@eloqnt/cli": "^0.6.17",
+		"@playwright/cli": "^0.1.18",
+		"@playwright/test": "^1.62.1",
+		"@tailwindcss/turbopack": "^4.3.3",
+		"@tailwindcss/typography": "^0.5.20",
+		"@types/bun": "^1.4.0",
+		"@types/react": "^19.2.18",
+		"@types/react-dom": "^19.2.4",
+		"axe-core": "^4.13.0",
+		"axe-playwright": "^2.2.2",
+		"eslint-plugin-better-tailwindcss": "^4.7.0",
+		"eslint-plugin-playwright": "^2.11.0",
+		"eslint-plugin-regexp": "^3.2.0",
+		"is-in-ci": "^2.0.0",
+		"lefthook": "^2.1.10",
+		"openapi-typescript": "^7.13.0",
+		"oxfmt": "^0.64.0",
+		"oxlint": "^1.79.0",
+		"oxlint-tsgolint": "^7.0.2001",
+		"schema-dts": "^2.0.0",
+		"stylelint": "^17.14.1",
+		"stylelint-order": "^8.1.1",
+		"tailwindcss": "^4.3.3",
+		"tailwindcss-react-aria-components": "^2.2.0",
+		"tw-animate-css": "^1.4.0",
+		"typescript": "^7.0.2"
+	},
+	"stylelint": {
+		"extends": "./configs/stylelint/base.json"
+	},
+	"devEngines": {
+		"packageManager": {
+			"name": "pnpm",
+			"version": "^11.22.0",
+			"onFail": "download"
+		},
+		"runtime": {
+			"name": "bun",
+			"version": "^1.4.0",
+			"onFail": "download"
+		}
+	},
+	"engines": {
+		"runtime": {
+			"name": "bun",
+			"version": "^1.4.0",
+			"onFail": "download"
+		}
+	}
+}
